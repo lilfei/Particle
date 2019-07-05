@@ -1,4 +1,4 @@
-package com.example.particle;
+package com.example.particle.utils;
 
 import java.util.Random;
 

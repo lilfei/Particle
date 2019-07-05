@@ -1,4 +1,4 @@
-package com.example.particle;
+package com.example.particle.widget;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -7,47 +7,48 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 
-import static com.example.particle.Util.randomColor;
-import static com.example.particle.Util.randomRadius;
-import static com.example.particle.Util.randomV;
+import static com.example.particle.utils.Util.randomAngle;
+import static com.example.particle.utils.Util.randomColor;
+import static com.example.particle.utils.Util.randomRV;
+import static com.example.particle.utils.Util.randomRadius;
 
 /**
- * Created by mysat on 2018/5/12.
+ * Created by mysat on 2018/5/14.
  */
 
-public class ParticlesView extends View {
-
-    Paint paint = new Paint();
+public class ParticleRoundView extends View {
 
     int mScreenWidth = 910;
     int mScreenHeight = 826;
 
-    Particle[] particles = new Particle[120];
+    Paint paint = new Paint();
 
-    public ParticlesView(Context context) {
+    ParticleRound[] prs = new ParticleRound[120];
+
+    public ParticleRoundView(Context context) {
         this(context, null);
     }
 
-    public ParticlesView(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+    public ParticleRoundView(Context context, AttributeSet attr) {
+        this(context, attr, 0);
     }
 
-    public ParticlesView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+    public ParticleRoundView(Context context, AttributeSet attr, int defStyleAttr) {
+        super(context, attr, defStyleAttr);
         paint.setFlags(Paint.ANTI_ALIAS_FLAG);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        for (int i = 0; i < particles.length; i++) {
-            if (particles[i] == null || particles[i].state() == 0) {
-                particles[i] = new Particle(mScreenWidth / 2,  mScreenHeight / 2, randomV(), randomV(), randomRadius(), randomColor(), mScreenWidth, mScreenHeight);
+        for (int i = 0; i < prs.length; i++) {
+            if (prs[i] == null || !prs[i].show()) {
+                prs[i] = new ParticleRound(mScreenWidth / 2, mScreenHeight / 2, randomRV(), 180, 300, randomAngle(), randomRadius(), randomColor());
                 continue;
             }
-            particles[i].move();
-            paint.setColor(particles[i].color);
-            canvas.drawCircle(particles[i].centerX, particles[i].centerY, particles[i].radius, paint);
+            prs[i].move();
+            paint.setColor(prs[i].color);
+            canvas.drawCircle(prs[i].centerX, prs[i].centerY, prs[i].radius, paint);
 
         }
         postInvalidateDelayed(33);
@@ -80,7 +81,6 @@ public class ParticlesView extends View {
         } else {
             mScreenHeight = heightSize;
         }
-
         setMeasuredDimension(mScreenWidth, mScreenHeight);
     }
 }

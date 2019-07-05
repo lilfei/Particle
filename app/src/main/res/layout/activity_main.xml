@@ -2,17 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical">
 
-    <com.example.particle.ParticlesView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
+    <Button
+        android:id="@+id/btn_particles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="全屏溅射粒子" />
 
-    <com.example.particle.ParticleRoundView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
+    <Button
+        android:id="@+id/btn_particle_round"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="环形溅射粒子" />
 
 </LinearLayout>
 
